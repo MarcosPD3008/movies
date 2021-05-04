@@ -5,9 +5,9 @@ import { HomeComponent } from './components/home/home.component';
 import { MovieComponent } from './components/movie/movie.component';
 
 const routes: Routes = [
-  {path:"Home/:search", component:HomeComponent},
+  {path:"Home/:mode/:search", component:HomeComponent},
   {path:"Movie/:id", component:MovieComponent},
-  {path:"**", pathMatch:"full",redirectTo:"Home/"},
+  {path:"**", pathMatch:"full",redirectTo:"Home/cartelera/"},
 ];
 
 @NgModule({

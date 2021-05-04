@@ -13,24 +13,28 @@ export class HomeComponent implements OnInit {
   Titulo:string = "";
   Peliculas:any[] = [];
   Trending:any[] = [];
-  Kids:any[] = []
-  AllString:any[] = [[],[],[]] 
+  Kids:any[] = [];
+  AllString:any[] = [[],[],[]];
+  Mode:string = "cartelera"; 
 
   constructor(private router:Router, private activated:ActivatedRoute, public ps:PeliculasService) {
     router.events.subscribe((event:any) =>{
       if(event instanceof NavigationEnd){
         activated.params.subscribe(params =>{
+          this.Mode = params['mode'];
+
           if(params['search'] == ""){
-            this.SearchWord = ""              
-            this.Titulo = "Todas las peliculas"
+            this.SearchWord = "";
+            this.Titulo = "Todas las peliculas";
+
             ps.getEnCartelera().subscribe(pel =>{
               this.Peliculas = pel.results;
-              console.log(pel.results[0])
               this.AllString[0] = []
               for(var x = 0; x < this.Peliculas.length; x++){
                 this.AllString[0].push(97);
               }
             })
+
             ps.getPopulares().subscribe(pel =>{
               this.Trending = pel.results;
               this.AllString[1] = []
@@ -38,6 +42,7 @@ export class HomeComponent implements OnInit {
                 this.AllString[1].push(97);
               }
             })
+
             ps.getKids().subscribe(pel =>{
               this.Kids = pel.results;
               this.AllString[2] = []
@@ -60,7 +65,7 @@ export class HomeComponent implements OnInit {
         })
       }
     })
-   }
+  }
 
   ngOnInit(): void {
   }
@@ -71,5 +76,4 @@ export class HomeComponent implements OnInit {
     else
       this.AllString[j][i] = 97;
   }
-
 }

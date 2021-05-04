@@ -17,7 +17,7 @@ import { NoImagePipe } from './pipes/no-image.pipe';
     HomeComponent,
     MovieComponent,
     LimitPipe,
-    NoImagePipe
+    NoImagePipe  
   ],
   imports: [
     BrowserModule,

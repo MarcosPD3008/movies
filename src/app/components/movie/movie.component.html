@@ -1,28 +1,27 @@
 <div *ngIf="pel != {}">
-  <div>
-      <div style="float: left; width: 30%;">
-          <img class="img-fluid" [src]="ps.GetImgSrc(pel.poster_path) |noImage" width="400px" height = "500"><br>
-          <h5 class="text-center">
-              <span style="margin-left: 5px;" class="badge badge-pill badge-primary" *ngFor="let genre of pel.genres">
-                  {{genre.name}}
-              </span>
-          </h5>
-      </div>
-      <div style="float: left; width: 65%; margin-left: 3%;">
-        <h3 class="text-center font-weigth-bolder">{{pel.title}}</h3> <hr>
-         <p style="font-size: larger;">{{pel.overview}}</p><hr>
-         <p><b>Fecha de lanzamiento:</b> {{ pel.release_date}}</p>
-         <p><b>Pagina oficial:</b> <a [href]="pel.homepage" target="_blank">{{ pel.homepage}}</a></p><hr>
+  <h3 class="text-center font-weigth-bolder">{{pel.title}}</h3> <hr>
 
-         <div  style="float: left;">
-          <h3 class="text-center">Productoras</h3>
-          <ul *ngFor="let company of pel.production_companies">
-            <li>
-              {{company.name}}
-            </li>
-          </ul>
-         </div>
-      </div>
+  <div style="margin-left: auto; margin-right: auto;" [style.width.%]="Mobile ? 70 : 30" [style.marginRight.%]="Mobile ? auto : 3" [ngClass]="{'float-left':!Mobile}"> 
+    <img class="img-fluid" [src]="ps.GetImgSrc(pel.poster_path) |noImage" width="400px" height = "500"><br>
+    <h5 class="text-center">
+      <span style="margin-left: 5px;" class="badge badge-pill badge-primary" *ngFor="let genre of pel.genres">
+        {{genre.name}}
+      </span>
+    </h5>
   </div>
 
+  <p style="font-size: larger;">{{pel.overview}}</p><hr>
+  <p><b>Fecha de lanzamiento:</b> {{ pel.release_date}}</p>
+  <p>
+    <b>Pagina oficial: </b> <a [href]="pel.homepage" target="_blank">{{ pel.homepage}}</a></p><hr>
+    <div>
+    <h3 class="text-left">Productoras</h3>
+    <ul style="list-style: none;">
+      <li *ngFor="let company of pel.production_companies">
+        <span class="badge badge-pill badge-secondary font-weight-bolder"> 
+          {{company.name}} 
+        </span>
+      </li>
+    </ul>
+    </div>
 </div>

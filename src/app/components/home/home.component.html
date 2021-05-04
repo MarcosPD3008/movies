@@ -1,23 +1,29 @@
-<h3 class="text-center">{{Titulo}}</h3><hr>
-
-<h4 class="text-center" *ngIf='SearchWord == ""'>En cartelera</h4>
-<div class="card-columns">
-    <div class="card border-black" *ngFor="let pel of Peliculas |slice:0-10; index as i">
-      <img class="card-img-top puntero" routerLink="/Movie/{{pel.id}}" src="{{ps.GetImgSrc(pel.backdrop_path) |noImage}}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title text-primary puntero" routerLink="/Movie/{{pel.id}}">{{pel.title}}</h5>
-        <p class="card-text">{{pel.overview |limit: AllString[0][i]}}
-          <a [ngClass]="{'text-success': AllString[0][i] == 97,'text-danger': AllString[0][i] != 97}" *ngIf="pel.overview.length > 0"
-          class="alert-link" style="font-size: larger;"  (click)="CountChg(i, 0, pel.overview.length)">
-            ...
-          </a>
-        </p>
-      </div>
-    </div>
+<div *ngIf="SearchWord != ''">
+  <h3 class="text-center">{{Titulo}}</h3><hr>
 </div>
-<div *ngIf='SearchWord == ""'>
-  <h4 class="text-center">Trending</h4>
-<div class="card-columns">
+
+<div *ngIf="Mode == 'cartelera'">
+  <h4 class="text-center text-uppercase">En cartelera</h4><hr>
+  <div class="card-columns">
+      <div class="card border-black" *ngFor="let pel of Peliculas |slice:0-10; index as i">
+        <img class="card-img-top puntero" routerLink="/Movie/{{pel.id}}" src="{{ps.GetImgSrc(pel.backdrop_path) |noImage}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title text-primary puntero" routerLink="/Movie/{{pel.id}}">{{pel.title}}</h5>
+          <p class="card-text">{{pel.overview |limit: AllString[0][i]}}
+            <a [ngClass]="{'text-success': AllString[0][i] == 97,'text-danger': AllString[0][i] != 97}" *ngIf="pel.overview.length > 0"
+            class="alert-link" style="font-size: larger;"  (click)="CountChg(i, 0, pel.overview.length)">
+              ...
+            </a>
+          </p>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="Mode == 'tendencia'">
+  <h4 class="text-center text-uppercase">Trending</h4><hr>
+
+  <div class="card-columns">
     <div class="card border-black" *ngFor="let pel of Trending |slice:0-7; index as i">
       <img class="card-img-top puntero" routerLink="/Movie/{{pel.id}}" src="{{ps.GetImgSrc(pel.backdrop_path) |noImage}}" alt="Card image cap">
       <div class="card-body">
@@ -25,26 +31,31 @@
         <p class="card-text">{{pel.overview |limit: AllString[1][i]}}
           <a [ngClass]="{'text-success': AllString[1][i] == 97,'text-danger': AllString[1][i] != 97}" *ngIf="pel.overview.length > 0"
           class="alert-link" style="font-size: larger;"  (click)="CountChg(i, 1, pel.overview.length)">
-            Ver mas...
-          </a>
-        </p>
-      </div>
-    </div>
-</div>
-
-<h4 class="text-center">Trending Kids</h4>
-<div class="card-columns">
-    <div class="card border-black" *ngFor="let pel of Kids |slice:0-7; index as i">
-      <img class="card-img-top puntero" routerLink="/Movie/{{pel.id}}" src="{{ps.GetImgSrc(pel.backdrop_path) |noImage}}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title text-primary puntero" routerLink="/Movie/{{pel.id}}">{{pel.title}}</h5>
-        <p class="card-text">{{pel.overview |limit: AllString[2][i]}}
-          <a [ngClass]="{'text-success': AllString[2][i] == 97,'text-danger': AllString[2][i] != 97}" *ngIf="pel.overview.length > 0"
-          class="alert-link" style="font-size: larger;"  (click)="CountChg(i, 2, pel.overview.length)">
             ...
           </a>
         </p>
       </div>
     </div>
 </div>
+
+</div>
+
+<div *ngIf="Mode == 'tendenciaKids'">
+  <h4 class="text-center text-uppercase">Trending Kids</h4><hr>
+  
+  <div class="card-columns">
+      <div class="card border-black" *ngFor="let pel of Kids |slice:0-7; index as i">
+        <img class="card-img-top puntero" routerLink="/Movie/{{pel.id}}" src="{{ps.GetImgSrc(pel.backdrop_path) |noImage}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title text-primary puntero" routerLink="/Movie/{{pel.id}}">{{pel.title}}</h5>
+          <p class="card-text">{{pel.overview |limit: AllString[2][i]}}
+            <a [ngClass]="{'text-success': AllString[2][i] == 97,'text-danger': AllString[2][i] != 97}" *ngIf="pel.overview.length > 0"
+            class="alert-link" style="font-size: larger;"  (click)="CountChg(i, 2, pel.overview.length)">
+              ...
+            </a>
+          </p>
+        </div>
+      </div>
+  </div>
+
 </div>

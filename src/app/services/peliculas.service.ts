@@ -45,6 +45,7 @@ export class PeliculasService {
     return this.jsonp.get( url )
                 .map( res=> res.json());
   }
+  
   GetImgSrc( url: string): string{
     return `${this.urlPicture + url}`
   }
